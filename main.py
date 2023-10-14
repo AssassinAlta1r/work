@@ -1,30 +1,39 @@
 from tkinter import *
 import tkinter as ttk
 import service
+import random
 
-#print(service.random_word())
+class Gallows:
+    def __init__(self):
+        self.init_game()
+        self.health_points = ['*', '*', '*']
 
-def show_message():
-
-    
-root = Tk()
-root.geometry('1000x500')
-root.title('Виселица')
-
-
-button1 = ttk.Button(root,text='Начать')
-button1.pack()
-button2 = ttk.Button(root,text='Жми', command = show_message)
-button2.pack
+    def init_game(self):
+        self.root = Tk()
+        self.root.geometry('1000x500')
+        self.root.title('Виселица')
 
 
-entry = ttk.Entry()
-entry.pack(expand=TRUE)
+        self.button1 = ttk.Button(self.root,text='Начать', command=self.show_word)
+        self.button1.pack()
 
+        self.label = ttk.Label(self.root)
+        self.label.pack()
 
-label = ttk.Label(root)
-label.place()
-label.pack()
+        
 
+        self.root.mainloop()
 
-root.mainloop()
+        self.entry = ttk.Entry()
+        self.entry.pack()
+
+    def show_word(self):
+        counter = 0
+
+        generated_word = service.random_word()[1][counter]
+        counter += 1
+
+        self.label.config(text=generated_word)
+        
+
+gallows = Gallows()
